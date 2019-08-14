@@ -84,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='subl3'
+  export EDITOR='subl'
 fi
 
 # Compilation flags
@@ -96,13 +96,5 @@ fi
 # For a full list of active aliases, run `alias`.
 
 source $HOME/.oh-my-zsh/custom/alias.zsh
-
-# misc
-source /usr/share/nvm/init-nvm.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-# tilix
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
-fi
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
