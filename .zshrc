@@ -69,7 +69,10 @@ ZSH_THEME="oxide"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  zsh-nvm # https://github.com/lukechilds/zsh-nvm
+  git
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,10 +98,9 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-source $HOME/.oh-my-zsh/custom/alias.zsh
+# source $HOME/.oh-my-zsh/custom/alias.zsh
 
 # misc
-source /usr/share/nvm/init-nvm.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -106,3 +108,9 @@ source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
+
+# export variables
+export GOPATH=$HOME/go
+
+# custom path
+export PATH="$HOME/go/bin:$PATH"
