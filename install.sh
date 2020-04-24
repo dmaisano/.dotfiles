@@ -6,7 +6,7 @@ NC="\033[0m"
 
 # Install Antigen
 # https://github.com/zsh-users/antigen
-# curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
+curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
 
 # Overwrite the existing zsh config file
 if [[ ! -f "$HOME/.zshrc" ]]; then
