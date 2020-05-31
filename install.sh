@@ -1,25 +1,35 @@
-RED="\033[0;31m"
+#!/bin/bash
 
-# No color
-NC="\033[0m"
+# COLORS
+RED="\e[1;31m"
+YELLOW="\e[1;33m"
+GREEN="\e[1;32m"
+BLUE="\e[1;34m"
+NC="\e[0m"
 
-
-# Install Antigen
-# https://github.com/zsh-users/antigen
-curl -L git.io/antigen > $HOME/.dotfiles/antigen.zsh
-
-# Overwrite the existing zsh config file
-if [[ ! -f "$HOME/.zshrc" ]]; then
-  echo "$RED Making backup of"
-fi
-
-# Linux specific config
-if [ $OSTYPE == "linux-gnu" ]; then
+linux_config() {
   if [ ! -d "$HOME/.config/tilix/schemes" ]; then
     mkdir -p "$HOME/.config/tilix/schemes"
   fi
 
   cp -R $HOME/.dotfiles/.config/tilix/schemes/* "$HOME/.config/tilix/schemes"
+}
 
-  echo "Copied Tilix color schemes"
-fi
+main() {
+  echo "foo"
+  if [ -f "$HOME/.zshrc" ]; then
+    echo -e "${YELLOW}Making backup of existing ${GREEN}.zshrc ⚠️${NC}"
+
+    cp "$HOME/.zshrc" "$HOME/.zshrc.bak"
+  fi
+
+  cp ".zshrc" "$HOME/.zshrc"
+
+  if [ "$OSTYPE" = "linux-gnu" ]; then
+    linux_config
+  fi
+
+  echo "Done ✅"
+}
+
+main

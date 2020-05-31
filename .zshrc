@@ -1,32 +1,34 @@
-source $HOME/.dotfiles/antigen.zsh
+### load zgen
+source "${HOME}/.zgen/zgen.zsh"
 
-antigen use oh-my-zsh
+### if the init script doesn't exist
+if ! zgen saved; then
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle pip
-antigen bundle command-not-found
+  ### specify plugins here
+  zgen oh-my-zsh
 
-# Custom Bundles
-antigen bundle zdharma/fast-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-
-export NVM_DIR="$HOME/.nvm"
-antigen bundle lukechilds/zsh-nvm
-
-# Custom Theme
-antigen theme denysdovhan/spaceship-prompt
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='code'
-else
-  export EDITOR='code'
+  ### generate the init script from plugins above
+  zgen save
 fi
 
-# Tilix
+### specify plugins to load
+zgen oh-my-zsh
+zgen oh-my-zsh plugins/git
+zgen oh-my-zsh plugins/sudo
+zgen oh-my-zsh plugins/command-not-found
+zgen load zdharma/fast-syntax-highlighting
+zgen load zsh-users/zsh-autosuggestions
+zgen load lukechilds/zsh-nvm
+
+### theme
+zgen load denysdovhan/spaceship-prompt spaceship
+
+### tilix
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
-antigen apply
+### Custom aliases
+alias zshconfig="code ~/.zshrc"
+alias ohmyzsh="code ~/.oh-my-zsh"
+alias subl="subl3"
