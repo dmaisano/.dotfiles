@@ -15,6 +15,7 @@ fi
 zgen oh-my-zsh
 zgen oh-my-zsh plugins/git
 zgen oh-my-zsh plugins/sudo
+zgen oh-my-zsh plugins/colored-man-pages
 zgen oh-my-zsh plugins/command-not-found
 zgen load zdharma/fast-syntax-highlighting
 zgen load zsh-users/zsh-autosuggestions
@@ -30,5 +31,4 @@ fi
 
 ### Custom aliases
 alias zshconfig="code ~/.zshrc"
-alias ohmyzsh="code ~/.oh-my-zsh"
 alias subl="subl3"
