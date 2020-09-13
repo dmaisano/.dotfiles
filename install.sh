@@ -11,7 +11,7 @@ git --version > /dev/null 2>&1
 git_exists=$?
 
 fira_code_install() {
-  echo -e "Downloading Fira Code font: ${BLUE}https://github.com/tonsky/FiraCode${RESET}"
+  echo -e "📥 Downloading Fira Code font: ${BLUE}https://github.com/tonsky/FiraCode${RESET}"
   fonts_dir="${HOME}/.local/share/fonts"
   if [ ! -d "${fonts_dir}" ]; then
       echo "mkdir -p $fonts_dir"
@@ -63,9 +63,16 @@ main() {
     cp "$HOME/.zshrc" "$HOME/.zshrc.bak"
   fi
 
-  cp ".zshrc" "$HOME/.zshrc"
+  ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
 
-  if [ "$OSTYPE" = "linux-gnu" ]; then
+  ### install zgen
+  if [ ! -d  $"{HOME}/.zgen" ]; then
+    echo -e "📥 Downloading zgen: ${BLUE}https://github.com/tarjoilija/zgen${RESET}"
+    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+  fi
+
+   ### native linux (excludes WSL)
+  if [ "$OSTYPE" = "linux-gnu" ] && ! grep -qi "microsoft" /proc/version; then
     linux_config
   fi
 

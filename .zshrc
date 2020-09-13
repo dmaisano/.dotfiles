@@ -32,3 +32,6 @@ fi
 ### Custom aliases
 alias zshconfig="code ~/.zshrc"
 alias subl="subl3"
+
+export DENO_INSTALL="~/.deno"
+export PATH="$DENO_INSTALL/bin:$HOME/.cargo/bin:$PATH"
