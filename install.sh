@@ -62,8 +62,8 @@ main() {
     echo -e "${YELLOW}Making backup of existing ${GREEN}.zshrc ⚠️${RESET}"
     cp "$HOME/.zshrc" "$HOME/.zshrc.bak"
   fi
-
-  ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+  
+  ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
 
   ### install zgen
   if [ ! -d  $"{HOME}/.zgen" ]; then
