@@ -39,6 +39,8 @@ main() {
   echo "🔗 Creating symlink between $PWD/.zshrc -> $HOME/.zshrc"
   ln -sf $PWD/.zshrc $HOME/.zshrc
 
+  source $HOME/.zshrc
+
   echo "✅ Done"
 }
 

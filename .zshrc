@@ -1,26 +1,23 @@
-### * install zgen if not exists
-if [ ! -d "${HOME}/.zgen" ]; then
-  git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
-fi
-
 ### * load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
-### * if the init script doesn't exist
+### * runs if the init script doesn't exist
 if ! zgen saved; then
 
   ### * specify plugins here
   zgen oh-my-zsh
+  zgen oh-my-zsh plugins/colorize
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/nvm
+  zgen oh-my-zsh plugins/npm
   zgen oh-my-zsh plugins/rust
-  # zgen oh-my-zsh plugins/colored-man-pages
-  # zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/colored-man-pages
+  zgen oh-my-zsh plugins/command-not-found
+  zgen load lukechilds/zsh-nvm
   zgen load lukechilds/zsh-better-npm-completion
 
   ### * theme
   zgen load spaceship-prompt/spaceship-prompt spaceship
-  # eval "$(starship init zsh)"
 
   ### * quality of life stuff
   zgen load zsh-users/zsh-autosuggestions
@@ -33,7 +30,6 @@ fi
 ### * custom aliases
 alias zshconfig="code ~/.zshrc"
 alias subl="subl3"
-
 
 if [ -d "${HOME}/.deno" ]; then
   export DENO_INSTALL="~/.deno"
