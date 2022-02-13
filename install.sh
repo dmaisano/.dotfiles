@@ -20,7 +20,7 @@ main() {
     read -p "☁️  Configure global git credentials? [y/N]: " git_prompt
 
     shopt -s nocasematch
-    if [ $git_prompt == "y" ]; then
+    if [ "$git_prompt" == "y" ]; then
       read -p "🧔 Enter git username: " git_username
       git config --global user.name $git_username
 
@@ -38,8 +38,6 @@ main() {
 
   echo "🔗 Creating symlink between $PWD/.zshrc -> $HOME/.zshrc"
   ln -sf $PWD/.zshrc $HOME/.zshrc
-
-  source $HOME/.zshrc
 
   echo "✅ Done"
 }
