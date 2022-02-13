@@ -6,7 +6,9 @@ Ensure you have the following installed
 
 - git
 
-- nvm (optional)
+- [nvm](https://github.com/nvm-sh/nvm) (optional)
+
+  - `brew install nvm` on mac
 
 ## Fish
 
