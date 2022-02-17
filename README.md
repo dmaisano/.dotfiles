@@ -20,6 +20,10 @@ Installs the following:
 
   - Will also install the omf plugins specified in `.config/omf/bundle`
 
+- [Fast Node Manager (fnm)](https://github.com/Schniz/fnm)
+
+  - alternative to [nvm](https://github.com/nvm-sh/nvm)
+
 - [starship prompt](https://starship.rs/guide/#step-2-setup-your-shell-to-use-starship)
 
 ## ZSH
