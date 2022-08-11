@@ -16,5 +16,15 @@ fish_add_path /usr/local/sbin
 
 # Delete all local branches except master or current working branch
 function gbr
-    git branch | grep -Ev "master|$(git branch --show-current)" | xargs git branch -D
+    git branch | grep -Ev "master|(git branch --show-current)" | xargs git branch -D
 end
+
+# set DISPLAY variable to the IP automatically assigned to WSL2
+set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+# Automatically start dbus
+sudo /etc/init.d/dbus start &> /dev/null
+
+# pnpm
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
