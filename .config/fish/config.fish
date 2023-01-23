@@ -13,6 +13,9 @@ end
 set -gx IS_MAC 0
 
 if test $IS_WSL -eq 1
+    # ensure user has sudo privledges
+    # https://www.simplehelp.net/2009/05/27/how-to-stop-ubuntu-from-asking-for-your-sudo-password/
+
     # set DISPLAY variable to the IP automatically assigned to WSL2
     set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
     # Automatically start dbus

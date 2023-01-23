@@ -1,14 +1,22 @@
 #!/usr/bin/fish
 
-curl -fsSL https://fnm.vercel.app/install | bash
+set oldIFS "$IFS"
+set IFS ""
+set fnm_install_output (curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.fnm")
+wait $last_pid
 
-rm -f "$HOME/.config/fish/conf.d/fnm.fish"
-ln -sfn "$PWD/.config/fish/conf.d/fnm.fish" "$HOME/.config/fish/conf.d/fnm.fish"
+if string match -r -q 'Not installing fnm due to missing dependencies' $fnm_install_output
+  exit 1
+end
 
-source /home/dmaisano/.config/fish/conf.d/fnm.fish
+set fnm_config_dir "$HOME/.config/fish"
 
-mkdir -p $PWD/.config/fish/completions
+rm -f "$fnm_config_dir/conf.d/fnm.fish"
+ln -sfn "$PWD/.config/fish/conf.d/fnm.fish" "$fnm_config_dir/conf.d/fnm.fish"
 
-fnm completions --shell=fish > $PWD/.config/fish/completions/fnm.fish
+source "$fnm_config_dir/conf.d/fnm.fish"
 
-ln -sfn "$PWD/.config/fish/completions/fnm.fish" "$HOME/.config/fish/completions/fnm.fish"
+set fnm_completions_dir "$PWD/.config/fish/completions"
+mkdir -p "$fnm_completions_dir" "$fnm_config_dir/completions"
+fnm completions --shell=fish > "$fnm_completions_dir/fnm.fish"
+ln -sfn "$fnm_completions_dir/fnm.fish" "$fnm_config_dir/completions/fnm.fish"
