@@ -17,8 +17,7 @@ rm -rf "$HOME/.config/omf"
 rm -rf "$HOME/.local/share/omf"
 rm -rf "$HOME/.fnm"
 
-mkdir -p "$HOME/.config/fish/completions"
-mkdir -p "$HOME/.config/fish/conf.d"
+mkdir -p "$HOME/.config/fish/completions" "$HOME/.config/fish/conf.d"
 
 eval fish "$PWD/scripts/fnm_install.fish"
 
