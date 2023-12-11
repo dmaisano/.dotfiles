@@ -30,7 +30,7 @@ end
 # end
 
 # rust
-bass source "$HOME/.cargo/env"
+# bass source "$HOME/.cargo/env"
 
 fish_add_path /usr/local/sbin
 
