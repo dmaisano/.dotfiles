@@ -41,3 +41,7 @@ ln -sfn "$PWD/.config/starship.toml" "$HOME/.config/starship.toml"
 ln -sfn "$PWD/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
 
 eval fish
+
+# TODO:
+# add notes for setting up https://direnv.net/ + pyenv detection
+# ln -sfn "$PWD/.config/fish/config.fish" "$HOME/.config/fish/config.fish"

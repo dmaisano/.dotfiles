@@ -48,7 +48,7 @@ end
 
 
 # pnpm
-set -gx PNPM_HOME "/home/sbf/.local/share/pnpm"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
@@ -58,10 +58,18 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-
+# pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#set-up-your-shell-environment-for-pyenv
+set -gx PYENV_ROOT "$HOME/.pyenv"
+fish_add_path "$PYENV_ROOT/bin"
+pyenv init - | source
+# fish_add_path "$PYENV_ROOT/shims"
+# pyenv end
 
 # pyenv init - https://gist.github.com/entropiae/326611addf6662d1d8fbf5792ab9a770#file-install-pyenv-on-ubuntu-18-04-fish-shell-L19
-set -U fish_user_paths $HOME/.pyenv/bin $fish_user_paths
-if command -v pyenv 1>/dev/null 2>&1
-    pyenv init - | source
-end
+# set -U fish_user_paths $HOME/.pyenv/bin $fish_user_paths
+# if command -v pyenv 1>/dev/null 2>&1
+#     pyenv init - | source
+# end
+
+# https://direnv.net/docs/hook.html
+direnv hook fish | source

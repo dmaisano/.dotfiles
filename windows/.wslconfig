@@ -1,0 +1,5 @@
+# place file in "C:\Users\YourUserName"
+
+[wsl2]
+memory=16GB   # Replace with desired memory allocation (e.g., 16GB, 4GB)
+processors=8 # Replace with desired number of processors
