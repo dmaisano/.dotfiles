@@ -61,7 +61,7 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#set-up-your-shell-environment-for-pyenv
 set -gx PYENV_ROOT "$HOME/.pyenv"
 fish_add_path "$PYENV_ROOT/bin"
-pyenv init - | source
+# pyenv init - | source
 # fish_add_path "$PYENV_ROOT/shims"
 # pyenv end
 
@@ -72,4 +72,4 @@ pyenv init - | source
 # end
 
 # https://direnv.net/docs/hook.html
-direnv hook fish | source
+# direnv hook fish | source

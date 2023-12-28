@@ -1,47 +1,62 @@
 #!/usr/bin/fish
 
-# ensure script is run as root user
-# if not fish_is_root_user
-#   sudo (status filename) $argv
-#   exit $status
+# if not test $USER = "root"
+#     echo "This script must be run as root! user"
+#     exec sudo fish $argv[1]
 # end
 
-# set fish as default shell
-if string match -r -v -q '.*fish.*' "$SHELL"
-  chsh -s (which fish)
+function symlink_sync
+  set symlink_src_dirs "$PWD/.config/" "$PWD/.oh-my-zsh"
+
+  for source_dir in $symlink_src_dirs
+    for entry in (find "$source_dir" -type f -o -type d)
+      set destination (string replace $PWD $HOME $entry)
+
+      if not test -d (dirname $destination)
+        mkdir -p (dirname $destination)
+      end
+
+      if test -f $entry
+        ln -sfn $entry $destination
+      end
+    end
+  end
 end
 
-rm -rf "$HOME/.config/starship.toml"
-rm -rf "$HOME/.config/fish"
-rm -rf "$HOME/.config/omf"
-rm -rf "$HOME/.local/share/omf"
-rm -rf "$HOME/.fnm"
+function setup_fnm
+  curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.fnm" > fnm_install_output.txt 2>&1 &
+  wait
 
-mkdir -p "$HOME/.config/fish/completions" "$HOME/.config/fish/conf.d"
+  if grep -q "Not installing" "$PWD/fnm_install_output.txt"
+      echo "❌ Error installing fnm. Check \"$PWD/fnm_install_output.txt\" for more details."
+      exit 0
+  end
 
-eval fish "$PWD/scripts/fnm_install.fish"
+  set fnm_config_dir "$HOME/.config/fish"
+  ln -sfn "$PWD/.config/fish/*" "$fnm_config_dir"
+end
 
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > omf_install
-fish omf_install --noninteractive --path=~/.local/share/omf --config=~/.config/omf &
-wait $last_pid
+function setup_fish_shell
+  echo "⏳ Installing oh-my-fish. Check \"$PWD/omf_install_output.txt\" for more details."
+  curl -sS https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > omf_install &
+  wait
 
-eval "source \"$HOME/.local/share/omf/init.fish\""
+  fish omf_install --noninteractive --path=~/.local/share/omf --config=~/.config/omf > omf_install_output.txt 2>&1 &
+  wait
 
-ln -sfn "$PWD/.config/omf/bundle" "$HOME/.config/omf/bundle"
-ln -sfn "$PWD/.config/omf/channel" "$HOME/.config/omf/channel"
-ln -sfn "$PWD/.config/omf/theme" "$HOME/.config/omf/theme"
+  echo '💡 Please execute "omf install" and "omf reload" manually in a new fish shell instance.'
+end
 
-eval "omf install"
+function setup_starship
+  curl -sS https://starship.rs/install.sh > starship_install.sh &
+  wait
+  echo "⏳ Installing starship prompt 🚀 Check \"$PWD/starship_install_output.txt\" for more details."
+  sh starship_install.sh -y > starship_install_output.txt 2>&1 &
+  wait
+end
 
-eval "omf reload"
+symlink_sync
+setup_fnm
+setup_starship
+setup_fish_shell
 
-curl -sS https://starship.rs/install.sh | sh &
-wait $last_pid
-ln -sfn "$PWD/.config/starship.toml" "$HOME/.config/starship.toml"
-ln -sfn "$PWD/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
-
-eval fish
-
-# TODO:
-# add notes for setting up https://direnv.net/ + pyenv detection
-# ln -sfn "$PWD/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
