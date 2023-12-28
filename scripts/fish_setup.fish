@@ -1,10 +1,5 @@
 #!/usr/bin/fish
 
-# if not test $USER = "root"
-#     echo "This script must be run as root! user"
-#     exec sudo fish $argv[1]
-# end
-
 function symlink_sync
   set symlink_src_dirs "$PWD/.config/" "$PWD/.oh-my-zsh"
 
@@ -55,8 +50,22 @@ function setup_starship
   wait
 end
 
-symlink_sync
-setup_fnm
-setup_starship
-setup_fish_shell
+function main
+  # ? Intention is to run one function at a time. Restarting the shell maybe be required to run the next function.
+  if test (count $argv) -eq 0
+      echo "Missings arguments. Please specify at least one of the following options: symlinks, fnm, starship, fish"
+      exit 1
+  end
 
+  if contains "symlinks" $argv
+      symlink_sync
+  else if contains "fnm" $argv
+      symlink_sync
+  else if contains "starship" $argv
+      setup_starship
+  else if contains "fish" $argv
+      setup_fish_shell
+  end
+end
+
+main $argv
