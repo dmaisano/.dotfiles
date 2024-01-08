@@ -34,19 +34,6 @@ end
 
 fish_add_path /usr/local/sbin
 
-# alias python="/usr/local/bin/python3"
-
-# run a typescript file with applicable dotenv config
-function ts_script
-    npx ts-node -r dotenv/config $argv
-end
-
-# Delete all local branches except master or current working branch
-function gbr
-    git branch | grep -Ev "master|(git branch --show-current)" | xargs git branch -D
-end
-
-
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH

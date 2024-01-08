@@ -6,3 +6,7 @@ abbr --add --set-cursor gce "gh copilot explain \"%\""
 
 # ? git
 abbr --add --set-cursor gcm "git commit -m \"%\""
+
+
+# ? node
+abbr --add --set-cursor ts_script "npx ts-node -r dotenv/config %"
