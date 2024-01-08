@@ -75,8 +75,4 @@ pyenv init - | source
 # https://direnv.net/docs/hook.html
 # direnv hook fish | source
 
-# ? Abbreviations
-abbr --add  --set-cursor copilot "gh copilot %"
-abbr --add  --set-cursor gcs "gh copilot suggest \"%\""
-abbr --add  --set-cursor gce "gh copilot explain \"%\""
-abbr --add  --set-cursor gcm "git commit -m \"%\""
+source "$HOME/.config/fish/abbreviations.fish"
