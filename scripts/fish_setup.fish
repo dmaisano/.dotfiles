@@ -1,5 +1,8 @@
 #!/usr/bin/fish
 
+# NOTE: add the fish shell PPA if running on Ubuntu
+# sudo apt-add-repository ppa:fish-shell/release-3
+
 function symlink_sync
   set symlink_src_dirs "$PWD/.config/" "$PWD/.oh-my-zsh"
 

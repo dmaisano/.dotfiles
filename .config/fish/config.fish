@@ -61,8 +61,9 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # pyenv https://github.com/pyenv/pyenv?tab=readme-ov-file#set-up-your-shell-environment-for-pyenv
 set -gx PYENV_ROOT "$HOME/.pyenv"
 fish_add_path "$PYENV_ROOT/bin"
-# pyenv init - | source
+pyenv init - | source
 # fish_add_path "$PYENV_ROOT/shims"
+# echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init --path)"\nfi' >> ~/.bashrc
 # pyenv end
 
 # pyenv init - https://gist.github.com/entropiae/326611addf6662d1d8fbf5792ab9a770#file-install-pyenv-on-ubuntu-18-04-fish-shell-L19
@@ -73,3 +74,9 @@ fish_add_path "$PYENV_ROOT/bin"
 
 # https://direnv.net/docs/hook.html
 # direnv hook fish | source
+
+# ? Abbreviations
+abbr --add  --set-cursor copilot "gh copilot %"
+abbr --add  --set-cursor gcs "gh copilot suggest \"%\""
+abbr --add  --set-cursor gce "gh copilot explain \"%\""
+abbr --add  --set-cursor gcm "git commit -m \"%\""
