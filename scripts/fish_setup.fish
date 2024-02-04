@@ -25,13 +25,15 @@ function setup_fnm
   curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.fnm" > fnm_install_output.txt 2>&1 &
   wait
 
-  if grep -q "Not installing" "$PWD/fnm_install_output.txt"
-      echo "❌ Error installing fnm. Check \"$PWD/fnm_install_output.txt\" for more details."
-      exit 0
+  set -l matches (string match -r -i -g -- "(unzip)\.\.\. missing" (cat fnm_install_output.txt))
+  if test (count $matches) -gt 0
+    for match in $matches
+      echo "❌ Error installing fnm: missing dependency '$match'"
+    end
+  else
+    set fnm_config_dir "$HOME/.config/fish"
+    ln -sfn "$PWD/.config/fish/*" "$fnm_config_dir"
   end
-
-  set fnm_config_dir "$HOME/.config/fish"
-  ln -sfn "$PWD/.config/fish/*" "$fnm_config_dir"
 end
 
 function setup_fish_shell
@@ -63,7 +65,7 @@ function main
   if contains "symlinks" $argv
       symlink_sync
   else if contains "fnm" $argv
-      symlink_sync
+      setup_fnm
   else if contains "starship" $argv
       setup_starship
   else if contains "fish" $argv
