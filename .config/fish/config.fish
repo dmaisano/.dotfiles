@@ -7,7 +7,7 @@ end
 
 source "$HOME/.config/fish/os.fish"
 source "$HOME/.config/fish/abbreviations.fish"
-source "$HOME/.config/fish/python-stuff.fish"
+source "$HOME/.config/fish/python.fish"
 
 # rust
 # bass source "$HOME/.cargo/env"
