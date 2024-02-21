@@ -70,8 +70,12 @@ end
 
 
 function setup_symlinks
-  stow --adopt *
-  git restore .
+  if not type -q stow
+    echo "❌ 'stow' command is not installed. Exiting..."
+  else
+    stow --adopt *
+    git restore .
+  end
 end
 
 
