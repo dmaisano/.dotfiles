@@ -76,8 +76,19 @@ end
 
 
 function reset_dotfiles
-  set folder_names (ls $REPO_ROOT_DIR/.config) ~/{.oh-my-zsh, .zshrc} ~/.local/share/{fish, omf}
-  echo -e "⛔ Hold on pardner! 🤠 The following folders will be deleted:\n$(set_color bryellow)$folder_names$(set_color normal)"
+  set folder_names ~/{.oh-my-zsh, .zshrc} ~/.local/share/{fish, omf}
+  for entry in (ls $REPO_ROOT_DIR/.config)
+    set folder_names $folder_names ~/.config/$entry
+  end
+
+  set friendly_folder_names
+  for folder_name in $folder_names
+    set friendly_folder_names $friendly_folder_names (string replace -r "$HOME" "~" $folder_name)
+  end
+
+  set friendly_folder_names (printf "%s\n" $friendly_folder_names | sort)
+  set friendly_folder_names (string join ", " $friendly_folder_names)
+  echo -e "⛔ Hold on pardner! 🤠 The following folders will be deleted:\n$(set_color brgreen)$friendly_folder_names$(set_color normal)"
   read -l -P "Do you wish to continue? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
 
   if test (string trim -c " " -- (string lower -- $confirmation)) = "y"
