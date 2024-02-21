@@ -45,9 +45,7 @@ function setup_oh_my_fish
   fish "$SCRIPT_DIR/$BASE_FILE_NAME"".fish" --noninteractive --path=$OMF_PATH --config=~/.config/omf > omf_install_output.txt 2>&1 &
   wait
 
-  sleep 1.5 && source $OMF_PATH/init.fish
-  echo "⏳ Running 'omf install'..."
-  omf install &
+  echo "🧠 Don't forget to run $(set_color brcyan)'omf install'$(set_color normal) later! Ensure $(set_color brcyan)'~/.config/omf/bundle'$(set_color normal) has been copied over."
   wait
 end
 
@@ -64,7 +62,7 @@ function setup_starship
   echo "⏳ Installing starship -- 💫 The minimal, blazing-fast, and infinitely customizable prompt for any shell\nCheck \"$SCRIPT_DIR/$BASE_FILE_NAME""_output.txt for more details."
 
   curl -fsSL https://starship.rs/install.sh > $SCRIPT_DIR/$BASE_FILE_NAME.sh
-  bash $SCRIPT_DIR/$BASE_FILE_NAME.sh -y > "$SCRIPT_DIR/$BASE_FILE_NAME""_output.txt" 2>&1 &
+  sh $SCRIPT_DIR/$BASE_FILE_NAME.sh -y > "$SCRIPT_DIR/$BASE_FILE_NAME""_output.txt" 2>&1 &
   wait
 end
 
@@ -77,7 +75,7 @@ function setup_symlinks
 
 
   stow --adopt .
-  read -l -P "Run $(set_color bryellow)'git restore .'$(set_color normal)? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
+  read -l -P "Run $(set_color brcyan)'git restore .'$(set_color normal)? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
   if test (string trim -c " " -- (string lower -- $confirmation)) = "y"
     git restore .
   end
