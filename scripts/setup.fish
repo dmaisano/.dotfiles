@@ -72,10 +72,17 @@ end
 function setup_symlinks
   if not type -q stow
     echo "❌ 'stow' command is not installed. Exiting..."
-  else
-    stow --adopt *
+    return
+  end
+
+
+  stow --adopt .
+  read -l -P "Run $(set_color bryellow)'git restore .'$(set_color normal)? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
+  if test (string trim -c " " -- (string lower -- $confirmation)) = "y"
     git restore .
   end
+
+  # stow -n -v * # test run
 end
 
 
@@ -93,7 +100,7 @@ function reset_dotfiles
   set friendly_folder_names (printf "%s\n" $friendly_folder_names | sort)
   set friendly_folder_names (string join ", " $friendly_folder_names)
   echo -e "⛔ Hold on pardner! 🤠 The following folders will be deleted:\n$(set_color brgreen)$friendly_folder_names$(set_color normal)"
-  read -l -P "Do you wish to continue? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
+  read -l -P "Do you want to continue? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
 
   if test (string trim -c " " -- (string lower -- $confirmation)) = "y"
     echo "📁 Deleting folders..."

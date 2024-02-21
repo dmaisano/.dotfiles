@@ -1,9 +1,32 @@
-.git/
-.vscode/
+# Comments and blank lines are allowed.
 
-notes/
-scripts/
-windows/
+# reference - https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists
 
-README.md
-README.png
+RCS
+.+,v
+
+CVS
+\.\#.+ # CVS conflict files / emacs lock files
+\.cvsignore
+
+\.svn
+\_darcs
+\.hg
+
+\.git
+\.gitignore
+
+.+~     # emacs backup files
+\#.\*\# # emacs autosave files
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# custom
+
+\.vscode
+
+/notes
+/scripts
+/windows
