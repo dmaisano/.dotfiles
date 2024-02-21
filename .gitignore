@@ -12,10 +12,6 @@ Thumbs.db
 
 antigen.zsh
 
-omf_install
-omf_install_output.txt
-
-fnm_install_output.txt
-
-starship_install.sh
-starship_install_output.txt
+fnm_install*
+omf_install*
+starship_install*

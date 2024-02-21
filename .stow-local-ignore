@@ -5,11 +5,5 @@ notes/
 scripts/
 windows/
 
-.gitconfig.example
-git-config.sh
-omf_install.sh
-omf_install.output.txt
-starship_install.sh
-starship_install_output.txt
 README.md
 README.png
