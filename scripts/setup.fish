@@ -92,7 +92,7 @@ end
 function main
   # ? Intention is to run one function at a time. Restarting the shell maybe be required as needed
   if test (count $argv) -eq 0
-      echo "Missings arguments. Please specify at least one of the following options: fnm, omf, python, starship, symlinks."
+      echo "Missings arguments. Please specify at least one of the following options: fnm, git, omf, python, starship, symlinks, $(set_color bryellow)reset$(set_color normal)."
       exit 1
   end
 
