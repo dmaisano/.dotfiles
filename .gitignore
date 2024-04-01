@@ -12,6 +12,8 @@ Thumbs.db
 
 antigen.zsh
 
+.config/fish/fish_variables
+
 fnm_install*
 omf_install*
 starship_install*
