@@ -21,7 +21,7 @@ else if test (uname) = "Darwin"
 end
 
 set -gx LINUX_DISTRO
-if lsb_release -i | grep -q "Ubuntu"
+if lsb_release -i | grep -q -E "Ubuntu|Pop"
   set -gx LINUX_DISTRO "ubuntu"
 else if test -f /etc/arch-release
   set -gx LINUX_DISTRO "arch"
