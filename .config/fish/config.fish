@@ -6,7 +6,7 @@ if status is-interactive
 end
 
 source "$HOME/.config/fish/os.fish"
-source "$HOME/.config/fish/abbreviations.fish"
+source "$HOME/.config/fish/macros.fish"
 source "$HOME/.config/fish/python.fish"
 
 # rust
