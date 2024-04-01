@@ -1,3 +1,5 @@
+# ? reference -- https://starship.rs/config/
+
 # Inserts a blank line between shell prompts
 add_newline = true
 command_timeout = 1000
@@ -14,3 +16,6 @@ disabled = true
 format = "via [⬢ $version](bold green) "
 version_format = "v${raw}"
 symbol = "⬢"
+
+[gcloud]
+disabled = true
