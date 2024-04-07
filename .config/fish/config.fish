@@ -27,3 +27,6 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # https://direnv.net/docs/hook.html
 # direnv hook fish | source
+
+set -gx PATH "$HOME/.local/bin" $PATH
+set -gx PATH "$HOME/.local/share/JetBrains/Toolbox/scripts/" $PATH
