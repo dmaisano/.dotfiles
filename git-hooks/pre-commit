@@ -1,0 +1,18 @@
+#!/bin/fish
+
+# get files that are about to be committed
+set files (git diff --cached --name-only)
+
+for file in $files
+    if test (string match -r '\.fish$' $file)
+        fish_indent -w $file
+
+        if test $status -ne 0
+            echo "\e[32mfish_indent\e[0m failed on $file. Commit aborted."
+            exit 1
+        end
+
+        # add the file back to the staging area after formatting
+        git add $file
+    end
+end
