@@ -1,0 +1,1 @@
+- [] Add support for linting additional file extensions in the pre-commit hook (properties files, TOML, yaml, .zsh, etc)
