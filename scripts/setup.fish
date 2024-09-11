@@ -24,6 +24,12 @@ function setup_fnm
 end
 
 
+function setup_asdf
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    mkdir -p "$HOME/.config/fish/completions"; and ln -sf "$HOME/.asdf/completions/asdf.fish" "$HOME/.config/fish/completions"
+end
+
+
 function setup_git
     read -l -P "🐙 Enter git username: " username
     read -l -P "📧 Enter git email addreess: " email

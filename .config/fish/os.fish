@@ -20,12 +20,14 @@ else if test (uname) = Darwin
     set -gx OS_TYPE macos
 end
 
+
 set -gx LINUX_DISTRO
 if lsb_release -i | grep -q -E "Ubuntu|Pop"
     set -gx LINUX_DISTRO ubuntu
 else if test -f /etc/arch-release
     set -gx LINUX_DISTRO arch
 end
+
 
 # WSL 2 X-11 forwarding (tl;dr) WSLg has ugly window decorations and janky resizing
 # ? Reference - https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj
@@ -34,6 +36,7 @@ if test $OS_TYPE = wsl2
     set -gx DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
     set -gx LIBGL_ALWAYS_INDIRECT 1
 end
+
 
 if test $LINUX_DISTRO = arch
     # ? source gcloud sdk from AUR
