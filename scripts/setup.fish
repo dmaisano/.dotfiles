@@ -1,4 +1,4 @@
-#!/usr/bin/fish
+#!/usr/bin/env fish
 
 # NOTE: add the fish shell PPA if running on Ubuntu
 # sudo apt-add-repository ppa:fish-shell/release-3
@@ -25,8 +25,12 @@ end
 
 
 function setup_asdf
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-    mkdir -p "$HOME/.config/fish/completions"; and ln -sf "$HOME/.asdf/completions/asdf.fish" "$HOME/.config/fish/completions"
+    if not test -d "$HOME/.asdf"
+        git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
+    end
+    mkdir -p "$HOME/.config/fish/completions"; and ln -sf "$HOME/.asdf/completions/asdf.fish" "$REPO_ROOT_DIR/.config/fish/completions"
+    source "$HOME/.config/fish/asdf.fish"
+    asdf plugin add golang
 end
 
 
@@ -44,7 +48,7 @@ end
 
 function setup_git_hooks
     mkdir -p $REPO_ROOT_DIR/.git/hooks
-    cp $REPO_ROOT_DIR/git-hooks/pre-commit $REPO_ROOT_DIR/.git/hooks/pre-commit
+    ln -sf $REPO_ROOT_DIR/git-hooks/pre-commit $REPO_ROOT_DIR/.git/hooks/pre-commit
     chmod +x $REPO_ROOT_DIR/.git/hooks/pre-commit
     echo "🪝  Git hooks setup complete"
 end
@@ -134,6 +138,8 @@ function main
 
     if contains fnm $argv
         setup_fnm
+    else if contains asdf $argv
+        setup_asdf
     else if contains git $argv
         setup_git
     else if contains hooks $argv

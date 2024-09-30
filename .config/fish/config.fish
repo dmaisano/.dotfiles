@@ -13,7 +13,9 @@ source "$HOME/.config/fish/nodejs.fish"
 fish_add_path /usr/local/sbin
 
 # https://direnv.net/docs/hook.html
-direnv hook fish | source
+if type -q direnv
+    direnv hook fish | source
+end
 
 set -gx PATH "$HOME/.local/bin" $PATH
 set -gx PATH "$HOME/.local/share/JetBrains/Toolbox/scripts/" $PATH

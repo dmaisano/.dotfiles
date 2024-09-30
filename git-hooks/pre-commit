@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/usr/bin/env fish
 
 # get files that are about to be committed
 set files (git diff --cached --name-only)

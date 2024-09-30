@@ -1,5 +1,8 @@
-source "$HOME/.asdf/asdf.fish"
-source "$HOME/.asdf/plugins/golang/set-env.fish"
+if test -d "$HOME/.asdf"
+    source "$HOME/.asdf/asdf.fish"
+    source "$HOME/.asdf/plugins/golang/set-env.fish"
+end
+
 
 # if type -q asdf
 #     asdf init

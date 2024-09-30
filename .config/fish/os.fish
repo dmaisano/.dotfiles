@@ -21,11 +21,12 @@ else if test (uname) = Darwin
 end
 
 
-set -gx LINUX_DISTRO
-if lsb_release -i | grep -q -E "Ubuntu|Pop"
-    set -gx LINUX_DISTRO ubuntu
-else if test -f /etc/arch-release
-    set -gx LINUX_DISTRO arch
+if test $OS_TYPE = wsl2 -o $OS_TYPE = linux
+    if lsb_release -i | grep -q -E "Ubuntu|Pop"
+        set -gx LINUX_DISTRO ubuntu
+    else if test -f /etc/arch-release
+        set -gx LINUX_DISTRO arch
+    end
 end
 
 
@@ -37,13 +38,15 @@ if test $OS_TYPE = wsl2
     set -gx LIBGL_ALWAYS_INDIRECT 1
 end
 
-
-if test $LINUX_DISTRO = arch
-    # ? source gcloud sdk from AUR
-    if test -f /etc/profile.d/google-cloud-sdk.sh
-        bass source /etc/profile.d/google-cloud-sdk.sh
+if test $OS_TYPE = macos
+    # ? source homebrew
+    if test -d /opt/homebrew
+        fish_add_path /opt/homebrew/bin
     end
 
-    # ? source flatpak
-    set -gx XDG_DATA_DIRS /var/lib/flatpak/exports/share $HOME ".local/share/flatpak/exports/share" $XDG_DATA_DIRS
+    if test -d /usr/local/bin
+        fish_add_path PATH /usr/local/bin
+    end
+
+    # fish_add_path /usr/local/sbin
 end
