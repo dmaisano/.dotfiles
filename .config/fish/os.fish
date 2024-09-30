@@ -48,5 +48,14 @@ if test $OS_TYPE = macos
         fish_add_path PATH /usr/local/bin
     end
 
+    if test -d ~/.ssh
+        if not pgrep -u (whoami) ssh-agent >/dev/null
+            eval (ssh-agent -c)
+        end
+
+        /usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519 >/dev/null 2>&1
+        /usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519_personal >/dev/null 2>&1
+    end
+
     # fish_add_path /usr/local/sbin
 end
