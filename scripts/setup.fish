@@ -43,6 +43,7 @@ function setup_git
     git config --global credential.helper 'store --file ~/.my-credentials'
     git config --global core.editor "code --wait"
     git config --global init.defaultBranch main
+    git config --global pull.rebase true
 end
 
 
