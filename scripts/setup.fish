@@ -100,6 +100,8 @@ function setup_symlinks
     end
 
     # stow -n -v * # test run
+
+    setup_git_hooks
 end
 
 
