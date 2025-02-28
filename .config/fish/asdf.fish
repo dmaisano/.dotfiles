@@ -1,12 +1,8 @@
 if test -d "$HOME/.asdf"
     source "$HOME/.asdf/asdf.fish"
-    source "$HOME/.asdf/plugins/golang/set-env.fish"
+
+    if test -d "$HOME/.asdf/plugins/golang"
+        source "$HOME/.asdf/plugins/golang/set-env.fish"
+        fish_add_path $GOBIN
+    end
 end
-
-
-# if type -q asdf
-#     asdf init
-# end
-
-# ? list of plugins to manually install
-# asdf plugin add golang

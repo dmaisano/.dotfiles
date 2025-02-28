@@ -69,13 +69,6 @@ function setup_oh_my_fish
 end
 
 
-function setup_python
-    echo "⏳ Installing pyenv 🐍"
-    curl https://pyenv.run | bash & # pyenv-virtualenv plugin is installed by default
-    wait
-end
-
-
 function setup_starship
     set -l BASE_FILE_NAME starship_install
     echo "⏳ Installing starship -- 💫 The minimal, blazing-fast, and infinitely customizable prompt for any shell\nCheck \"$SCRIPT_DIR/$BASE_FILE_NAME""_output.txt for more details."

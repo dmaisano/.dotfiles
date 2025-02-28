@@ -4,20 +4,16 @@ if status is-interactive
     starship init fish | source
 end
 
-source "$HOME/.config/fish/asdf.fish"
-source "$HOME/.config/fish/os.fish"
-source "$HOME/.config/fish/macros.fish"
-source "$HOME/.config/fish/nodejs.fish"
-source "$HOME/.config/fish/work_profile.fish"
-# source "$HOME/.config/fish/python.fish"
 
 fish_add_path /usr/local/sbin
+fish_add_path $HOME/.local/bin
+
+
+if test -f "$HOME/.config/fish/my_profile.fish"
+    source "$HOME/.config/fish/my_profile.fish"
+end
 
 # https://direnv.net/docs/hook.html
 if type -q direnv
     direnv hook fish | source
 end
-
-set -gx PATH "$HOME/.local/bin" $PATH
-set -gx PATH "$HOME/.local/share/JetBrains/Toolbox/scripts/" $PATH
-set -gx PATH "$HOME/.lmstudio/bin" $PATH

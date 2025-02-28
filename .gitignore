@@ -18,4 +18,4 @@ fnm_install*
 omf_install*
 starship_install*
 
-.config/fish/work_profile.fish
+.config/fish/my_profile.fish

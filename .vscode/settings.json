@@ -1,6 +1,7 @@
 {
   "files.associations": {
     ".stow-local-ignore": "ignore",
-    ".gitconfig.example": "properties"
+    ".gitconfig.example": "properties",
+    ".asdfrc": "properties"
   }
 }
