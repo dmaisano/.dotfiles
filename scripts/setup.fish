@@ -55,6 +55,10 @@ function setup_git_hooks
 end
 
 
+function setup_pyenv
+    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+end
+
 function setup_oh_my_fish
     set -l BASE_FILE_NAME omf_install
     set OMF_PATH "$HOME/.local/share/omf"
@@ -126,7 +130,7 @@ end
 function main
     # ? Intention is to run one function at a time. Restarting the shell maybe be required as needed
     if test (count $argv) -eq 0
-        echo "Missings arguments. Please specify at least one of the following options: fnm, git, hooks, omf, python, starship, symlinks, $(set_color bryellow)reset$(set_color normal)."
+        echo "Missings arguments. Please specify at least one of the following options: fnm, git, hooks, omf, pyenv, starship, symlinks, $(set_color bryellow)reset$(set_color normal)."
         exit 1
     end
 
@@ -142,8 +146,8 @@ function main
         setup_git_hooks
     else if contains omf $argv
         setup_oh_my_fish
-    else if contains python $argv
-        setup_python
+    else if contains pyenv $argv
+        setup_pyenv
     else if contains starship $argv
         setup_starship
     else if contains symlinks $argv
