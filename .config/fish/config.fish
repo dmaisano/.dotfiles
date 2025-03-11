@@ -4,6 +4,7 @@ if status is-interactive
     starship init fish | source
 end
 
+set -gx XDG_CONFIG_HOME "$HOME/.config"
 
 fish_add_path /usr/local/sbin
 fish_add_path $HOME/.local/bin

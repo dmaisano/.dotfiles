@@ -56,7 +56,7 @@ end
 
 
 function setup_pyenv
-    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+    curl -fsSL https://pyenv.run | bash
 end
 
 function setup_oh_my_fish
