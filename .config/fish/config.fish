@@ -9,7 +9,6 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 fish_add_path /usr/local/sbin
 fish_add_path $HOME/.local/bin
 
-
 if test -f "$HOME/.config/fish/my_profile.fish"
     source "$HOME/.config/fish/my_profile.fish"
 end
