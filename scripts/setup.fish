@@ -23,17 +23,6 @@ function setup_fnm
     end
 end
 
-
-function setup_asdf
-    if not test -d "$HOME/.asdf"
-        git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
-    end
-    mkdir -p "$HOME/.config/fish/completions"; and ln -sf "$HOME/.asdf/completions/asdf.fish" "$REPO_ROOT_DIR/.config/fish/completions"
-    source "$HOME/.config/fish/asdf.fish"
-    asdf plugin add golang
-end
-
-
 function setup_git
     read -l -P "🐙 Enter git username: " username
     read -l -P "📧 Enter git email addreess: " email
@@ -46,14 +35,12 @@ function setup_git
     git config --global pull.rebase true
 end
 
-
 function setup_git_hooks
     mkdir -p $REPO_ROOT_DIR/.git/hooks
     ln -sf $REPO_ROOT_DIR/git-hooks/pre-commit $REPO_ROOT_DIR/.git/hooks/pre-commit
     chmod +x $REPO_ROOT_DIR/.git/hooks/pre-commit
     echo "🪝  Git hooks setup complete"
 end
-
 
 function setup_pyenv
     curl -fsSL https://pyenv.run | bash
@@ -72,7 +59,6 @@ function setup_oh_my_fish
     wait
 end
 
-
 function setup_starship
     set -l BASE_FILE_NAME starship_install
     echo "⏳ Installing starship -- 💫 The minimal, blazing-fast, and infinitely customizable prompt for any shell\nCheck \"$SCRIPT_DIR/$BASE_FILE_NAME""_output.txt for more details."
@@ -82,13 +68,11 @@ function setup_starship
     wait
 end
 
-
 function setup_symlinks
     if not type -q stow
         echo "❌ 'stow' command is not installed. Exiting..."
         return
     end
-
 
     stow --adopt .
     read -l -P "Run $(set_color brcyan)'git restore .'$(set_color normal)? $(set_color bryellow)(y/N)$(set_color normal): " confirmation
@@ -100,7 +84,6 @@ function setup_symlinks
 
     setup_git_hooks
 end
-
 
 function reset_dotfiles
     set folder_names ~/{.oh-my-zsh, .zshrc} ~/.local/share/{fish, omf}
@@ -125,7 +108,6 @@ function reset_dotfiles
         echo "👍 No changes made!"
     end
 end
-
 
 function main
     # ? Intention is to run one function at a time. Restarting the shell maybe be required as needed
