@@ -10,7 +10,6 @@
 #     # sudo /etc/init.d/dbus start &> /dev/null
 # end
 
-
 set -gx OS_TYPE
 if test -e /mnt/c/Windows/System32/wsl.exe
     set -gx OS_TYPE wsl2
@@ -20,7 +19,6 @@ else if test (uname) = Darwin
     set -gx OS_TYPE macos
 end
 
-
 if test $OS_TYPE = wsl2 -o $OS_TYPE = linux
     if lsb_release -i | grep -q -E "Ubuntu|Pop"
         set -gx LINUX_DISTRO ubuntu
@@ -28,7 +26,6 @@ if test $OS_TYPE = wsl2 -o $OS_TYPE = linux
         set -gx LINUX_DISTRO arch
     end
 end
-
 
 # WSL 2 X-11 forwarding (tl;dr) WSLg has ugly window decorations and janky resizing
 # ? Reference - https://aalonso.dev/blog/how-to-use-gui-apps-in-wsl2-forwarding-x-server-cdj
@@ -39,13 +36,21 @@ if test $OS_TYPE = wsl2
 end
 
 if test $OS_TYPE = macos
-    # ? source homebrew
-    if test -d /opt/homebrew
-        fish_add_path /opt/homebrew/bin
+    if not contains /usr/local/bin $PATH
+        fish_add_path /usr/local/bin
     end
 
-    if test -d /usr/local/bin
-        fish_add_path PATH /usr/local/bin
+    if not contains /usr/local/sbin $PATH
+        fish_add_path /usr/local/sbin
+    end
+
+    if not contains $HOME/.local/bin $PATH
+        fish_add_path $HOME/.local/bin
+    end
+
+    # ? source homebrew
+    if not contains /opt/homebrew/bin $PATH
+        fish_add_path /opt/homebrew/bin
     end
 
     if test -d ~/.ssh
@@ -56,6 +61,4 @@ if test $OS_TYPE = macos
         /usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519 >/dev/null 2>&1
         /usr/bin/ssh-add --apple-use-keychain ~/.ssh/id_ed25519_personal >/dev/null 2>&1
     end
-
-    # fish_add_path /usr/local/sbin
 end

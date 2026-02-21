@@ -6,8 +6,11 @@ end
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
-fish_add_path /usr/local/sbin
-fish_add_path $HOME/.local/bin
+# see https://github.com/Schniz/fnm/issues/1119
+set -gx XDG_RUNTIME_DIR /tmp/run/user/(id -u)
+if not test -d $XDG_RUNTIME_DIR
+    mkdir -p $XDG_RUNTIME_DIR
+end
 
 if test -f "$HOME/.config/fish/my_profile.fish"
     source "$HOME/.config/fish/my_profile.fish"
