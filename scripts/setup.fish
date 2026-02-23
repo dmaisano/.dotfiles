@@ -24,10 +24,10 @@ function setup_fnm
 end
 
 function setup_git
-    read -l -P "🐙 Enter git username: " username
-    read -l -P "📧 Enter git email addreess: " email
+    read -l -P "🐙 Enter your name: " name
+    read -l -P "📧 Enter your email address: " email
 
-    git config --global user.name $username
+    git config --global user.name $name
     git config --global user.email $email
     git config --global credential.helper 'store --file ~/.my-credentials'
     git config --global core.editor vi
